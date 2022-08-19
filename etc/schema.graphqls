@@ -1,0 +1,13 @@
+# Copyright © Magento, Inc. All rights reserved.
+# See COPYING.txt for license details.
+
+type Query {
+    lofCancelOrder(
+        order_id: String @doc(description: "Order id")
+    ):CancelOrders @resolver(class: "Lof\\CancelOrderGraphQl\\Model\\Resolver\\CancelOrder") @deprecated(reason: "CancelOrder")
+}
+
+type CancelOrders @doc(description: "cancel order") 
+{
+    code
+}

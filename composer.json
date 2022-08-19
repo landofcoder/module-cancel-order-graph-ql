@@ -1,0 +1,29 @@
+{
+  "name": "landofcoder/module-cancel-order-graph-ql",
+  "description": "cancel order Graph Ql",
+  "authors": [
+      {
+        "name": "Landofcoder",
+        "email": "landofcoder@gmail.com",
+        "homepage": "https://landofcoder.com",
+        "role": "Magento 2 extension Provider"
+      }
+  ],
+  "require": {
+  },
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": "GPL-3.0",
+  "autoload": {
+      "files": [ "registration.php" ],
+      "psr-4": {
+          "Lof\\CancelOrderGraphQl\\": ""
+      }
+  },
+  "repositories": {
+      "module-trackorder-pro": {
+        "type": "git",
+        "url": "https://github.com/landofcoder/module-cancel-order-graph-ql"
+      }
+  }
+}
