@@ -12,11 +12,10 @@ use Magento\Framework\GraphQl\Exception\GraphQlAuthorizationException;
 use Magento\Framework\GraphQl\Exception\GraphQlInputException;
 use Magento\Framework\GraphQl\Query\ResolverInterface;
 use Magento\Framework\GraphQl\Schema\Type\ResolveInfo;
-use Magento\GraphQl\Model\Query\ContextInterface;
 use Lof\CancelOrder\Api\CancelOrderManagementInterface;
 
 /**
- * CancelOrder data reslover
+ * CancelOrder data resolver
  */
 class CancelOrder implements ResolverInterface
 {
@@ -36,7 +35,15 @@ class CancelOrder implements ResolverInterface
     }
 
     /**
-     * @inheritDoc
+     * @param Field $field
+     * @param $context
+     * @param ResolveInfo $info
+     * @param array|null $value
+     * @param array|null $args
+     * @return bool|\Magento\Framework\GraphQl\Query\Resolver\Value|mixed|string
+     * @throws GraphQlAuthorizationException
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function resolve(
         Field $field,
@@ -44,17 +51,19 @@ class CancelOrder implements ResolverInterface
         ResolveInfo $info,
         array $value = null,
         array $args = null
-    ) {        
-        if (false === $context->getExtensionAttributes()->getIsCustomer() && !$enabled_guest_api) {
+    ) {
+        if (false === $context->getExtensionAttributes()->getIsCustomer()) {
             throw new GraphQlAuthorizationException(__('The current customer isn\'t authorized.'));
         }
-        $order_id = isset($args["order_id"])?trim($args["order_id"]):"";
+        if (!isset($args["order_id"])) {
+            throw new GraphQlInputException(__('pageSize value must be greater than 0.'));
+        }
         $customer_id = 0;
         if(false !== $context->getExtensionAttributes()->getIsCustomer()){
             $customer_id = $context->getUserId();
         }
-        
-        $cancelOrder = $this->repository->cancelOrder($customer_id, $order_id);
-        return $cancelOrder;
+        $order = $this->repository->cancelOrder($customer_id, $args["order_id"]);
+
+        return $order;
     }
 }
