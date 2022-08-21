@@ -40,3 +40,12 @@ It saves a lot of time and effort for store owners to manage their product quali
    -  Manage all comments of customer
    -  Enable to set email sender, email receiver and email template in the backend
    - Enable to configure Cancel Order button and Notice notes of the confirm popup
+```
+{
+  lofCancelOrder(
+    order_id: "000000007"
+  ){
+    message
+  }
+}
+```
