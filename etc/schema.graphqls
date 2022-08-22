@@ -19,6 +19,7 @@
 type Query {
     lofCancelOrder(
         order_id: String! @doc(description: "cancel order by order id.")
+        customer_comment: String! @doc(description: "Customer comment cancel order")
  ):Cancel @resolver(class: "\\Lof\\CancelOrderGraphQl\\Model\\Resolver\\CancelOrder") @doc(description: "cancel order by order id")
 }
 

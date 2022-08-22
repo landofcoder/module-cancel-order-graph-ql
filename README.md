@@ -43,7 +43,8 @@ It saves a lot of time and effort for store owners to manage their product quali
 ```
 {
   lofCancelOrder(
-    order_id: "000000007"
+    order_id: "000000016",
+    customer_comment: "tets"
   ){
     message
   }
