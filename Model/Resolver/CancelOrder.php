@@ -56,7 +56,10 @@ class CancelOrder implements ResolverInterface
             throw new GraphQlAuthorizationException(__('The current customer isn\'t authorized.'));
         }
         if (!isset($args["order_id"])) {
-            throw new GraphQlInputException(__('pageSize value must be greater than 0.'));
+            throw new GraphQlInputException(__("'order_id' input argument is required."));
+        }
+        if (!isset($args["customer_comment"])) {
+            throw new GraphQlInputException(__("'customer_comment' input argument is required."));
         }
         $customer_id = 0;
         if(false !== $context->getExtensionAttributes()->getIsCustomer()){
