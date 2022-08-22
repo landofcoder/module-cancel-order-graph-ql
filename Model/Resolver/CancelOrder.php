@@ -62,7 +62,7 @@ class CancelOrder implements ResolverInterface
         if(false !== $context->getExtensionAttributes()->getIsCustomer()){
             $customer_id = $context->getUserId();
         }
-        $order = $this->repository->cancelOrder($customer_id, $args["order_id"]);
+        $order = $this->repository->cancelOrder($customer_id, $args["order_id"],$args["customer_comment"]);
 
         return $order;
     }
